@@ -13,27 +13,35 @@
         "frequency": 1,
         "groups": [1,2,3,4,5,6]
     },
+    "seed": 0,
+    "path": {
+        "model_path": "./sample3.pth",
+        "downsampled_path": "./results_sample3.csv",
+        "test_full_path": "./test_full.csv",
+        "output_path": "./submission.csv"
+    },
     "data_loader": {
         "historic":{
             "number": 2,
             "frequency": 4
         },
-        "data_dir": "./data/",
+        "data_dir": "D:/Data/ICCV 2019 Learning-to-Drive Challenge/sample3/",
+        "dataset": "sample3",
         "train":{
-            "csv_name": "drive360challenge_train.csv",
-            "batch_size": 2,
+            "csv_name": "train_sample3.csv",
+            "batch_size": 128,
             "shuffle": true,
-            "num_workers": 2
+            "num_workers": 4
         },
         "validation": {
-            "csv_name": "drive360challenge_validation.csv",
-            "batch_size": 2,
+            "csv_name": "val_sample3.csv",
+            "batch_size": 128,
             "shuffle": true,
-            "num_workers": 2
+            "num_workers": 4
         },
         "test": {
-            "csv_name": "drive360challenge_test.csv",
-            "batch_size": 2,
+            "csv_name": "test_sample3.csv",
+            "batch_size": 128,
             "shuffle": false,
             "num_workers": 1
         }
