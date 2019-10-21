@@ -15,33 +15,28 @@
     },
     "seed": 0,
     "path": {
-        "model_path": "./sample3.pth",
-        "downsampled_path": "./results_sample3.csv",
-        "test_full_path": "./test_full.csv",
-        "output_path": "./submission.csv"
+        "model_dir": "./model/",
+        "csv_dir": "./csv/",
+        "test_full_path": "test_full.csv",
+        "output_path": "submission.csv"
     },
     "data_loader": {
         "historic":{
-            "number": 2,
-            "frequency": 4
+            "number": 4,
+            "frequency": 1
         },
-        "data_dir": "D:/Data/ICCV 2019 Learning-to-Drive Challenge/sample3/",
         "dataset": "sample3",
+        "data_dir": "D:/Data/ICCV 2019 Learning-to-Drive Challenge/",
+        "batch_size": 64,
         "train":{
-            "csv_name": "train_sample3.csv",
-            "batch_size": 128,
             "shuffle": true,
             "num_workers": 4
         },
-        "validation": {
-            "csv_name": "val_sample3.csv",
-            "batch_size": 128,
+        "val": {
             "shuffle": true,
             "num_workers": 4
         },
         "test": {
-            "csv_name": "test_sample3.csv",
-            "batch_size": 128,
             "shuffle": false,
             "num_workers": 1
         }

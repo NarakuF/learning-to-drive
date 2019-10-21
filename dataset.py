@@ -29,7 +29,7 @@ class Drive360Loader(DataLoader):
 
     def __init__(self, config, phase):
         self.drive360 = Drive360(config, phase)
-        batch_size = config['data_loader'][phase]['batch_size']
+        batch_size = config['data_loader']['batch_size']
         sampler = SubsetSampler(self.drive360.indices)
         num_workers = config['data_loader'][phase]['num_workers']
 
@@ -42,12 +42,12 @@ class Drive360Loader(DataLoader):
 
 class Drive360(object):
     # takes a config json object that specifies training parameters and a
-    # phase (string) to specifiy either 'train', 'test', 'validation'
+    # phase (string) to specifiy either 'train', 'test', 'val'
     def __init__(self, config, phase):
         self.config = config
-        self.data_dir = config['data_loader']['data_dir']
         self.dataset = config['data_loader']['dataset']
-        self.csv_name = config['data_loader'][phase]['csv_name']
+        self.data_dir = f"{config['data_loader']['data_dir']}{self.dataset}/"
+        self.csv_name = f'{phase}_{self.dataset}.csv'
         self.shuffle = config['data_loader'][phase]['shuffle']
         self.history_number = config['data_loader']['historic']['number']
         self.history_frequency = config['data_loader']['historic']['frequency']
@@ -114,7 +114,7 @@ class Drive360(object):
             # self.indices = list(set(self.indices) & set(bin_indices))
             # END
 
-        elif phase == 'validation':
+        elif phase == 'val':
             self.dataframe['canSteering'] = np.clip(self.dataframe['canSteering'], a_max=360, a_min=-360)
 
         elif phase == 'test':
@@ -151,7 +151,7 @@ class Drive360(object):
                 transforms.Normalize(mean=config['image']['norm']['mean'],
                                      std=config['image']['norm']['std'])
             ]),
-            'validation': transforms.Compose([
+            'val': transforms.Compose([
                 transforms.ToTensor(),
                 transforms.Normalize(mean=config['image']['norm']['mean'],
                                      std=config['image']['norm']['std'])
@@ -167,7 +167,7 @@ class Drive360(object):
                 transforms.Normalize(mean=config['image']['norm']['mean'],
                                      std=config['image']['norm']['std'])
             ]),
-            'validation': transforms.Compose([
+            'val': transforms.Compose([
                 transforms.ToTensor(),
                 transforms.Normalize(mean=config['image']['norm']['mean'],
                                      std=config['image']['norm']['std'])
